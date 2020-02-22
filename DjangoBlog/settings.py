@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'DjangoBlog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -102,6 +102,19 @@ DATABASES = {
         'USER': os.environ.get('DJANGO_MYSQL_USER'),
         'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD'),
         'HOST': os.environ.get('DJANGO_MYSQL_HOST'),
+        'PORT': 3306,
+        'OPTIONS': {'charset': 'utf8mb4'},
+    }
+}
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangoblog',
+        'USER': 'root',
+        'PASSWORD': 'yjn123',
+        'HOST': '129.28.170.158',
         'PORT': 3306,
         'OPTIONS': {'charset': 'utf8mb4'},
     }
@@ -174,6 +187,7 @@ PAGINATE_BY = 10
 # http cache timeout
 CACHE_CONTROL_MAX_AGE = 2592000
 # cache setting
+'''
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -182,6 +196,14 @@ CACHES = {
         'TIMEOUT': 60 * 60 * 10
     },
     'locmemcache': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': 10800,
+        'LOCATION': 'unique-snowflake',
+    }
+}
+'''
+CACHES = {
+    'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'TIMEOUT': 10800,
         'LOCATION': 'unique-snowflake',
@@ -197,14 +219,24 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
 
+EMAIL_HOST = 'smtp.sina.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'yjn20130214@sina.com'
+EMAIL_HOST_PASSWORD = '0214kunneng'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = 'smtp.sina.com'
+
+'''
 EMAIL_HOST = 'smtp.mxhichina.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = os.environ.get('DJANGO_EMAIL_USER')
+'''
 # Setting debug=false did NOT handle except email notifications
-ADMINS = [('admin', 'admin@admin.com')]
+# ADMINS = [('admin', 'admin@admin.com')]
+ADMINS = [('YuJinNeng', 'yjn20130214@sina.com')]
 # WX ADMIN password(Two times md5)
 WXADMIN = '995F03AC401D6CABABAEF756FC4D43C7'
 
